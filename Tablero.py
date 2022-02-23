@@ -8,24 +8,6 @@ def crearTablero(pcolumnas):
         tabla.append(fila)
     return tabla
 
-def elementoMasLargo(pM):
-    masLargo = 0
-    for lista in pM:
-        for elemento in lista:
-            largoActu = len(elemento)
-            if largoActu >= masLargo:
-                masLargo = largoActu
-    return masLargo
-
-def concatenarStrDeList(plist):
-    nuevoStr = ""
-    for elemento in plist:
-        if elemento.strip() != "":
-            nuevoStr += elemento + "-"
-    if nuevoStr.strip() == "":
-        return ""
-    return nuevoStr
-
 def agregarEspacios(string, tamano):
     """
     Funcionamiento: Sirve para que el string ingresado tenga un tamaño específico con espacios en blanco
@@ -78,16 +60,16 @@ class Tablero:
             if elemento.posicion >= 63:
                 return elemento.color
         return ""
+    
 ######################        
 # PROGRAMA PRINCIPAL #
 ######################
 fichasActuales = []
 contador = 1
 print("Los colores de las fichas serán: \n1. Rosa \n2. Rojo \n3. Azul \n4. Verde \n¡Cada ficha inicia en la posición 0!\n")
-colores = ["Rosa", "Rojo", "Azul", "Verde"]
-for i in range(4):
-    fichita = Ficha(colores[i])
-    fichasActuales.append(fichita)
+for color in ["Rosa", "Rojo", "Azul", "Verde"]:
+    fichaN = Ficha(color)
+    fichasActuales.append(fichaN)
 juego = Tablero(fichasActuales)
 while not juego.revisarGanador():
     for jugador in juego.listaFichas:
