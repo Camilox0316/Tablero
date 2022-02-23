@@ -20,7 +20,9 @@ class Ficha:
         pasos = self.dado.lanzar()
         self.posicion += pasos
         print(f"\nEs el turno de la ficha: {self.color} ")
-        input("\nPresione la tecla ENTER para lanzar el dado...")
+        input("\nPresione la tecla ENTER para lanzar el dado...\n")
+        if self.posicion >= 63:
+            self.posicion = 64
         print(f"\nEl dado muestra el número: {pasos}, la casilla actual de la ficha es: {self.posicion} \n")
         return
     

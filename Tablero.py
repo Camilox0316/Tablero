@@ -52,13 +52,14 @@ class Tablero:
         self.tabla = crearTablero(8)
         self.listaFichas = plistaFichas
         return
-
+    #defina aquí los métodos de Tablero
+    #recuerde que el primer parámetro de cada método es siempre self
     def imprimirTablero(self):
-        print("-"*175)
+        print("═"*175)
         for fila in self.tabla:
             for casilla in fila:
-                print(agregarEspacios(casilla, 21), end="|")
-            print(("\n") + "-"*175)
+                print(agregarEspacios(casilla, 21), end="║")
+            print(("\n") + "═"*175)
 
     def revisarGanador(self):
         for fichita in self.listaFichas:
@@ -66,7 +67,7 @@ class Tablero:
                 return True
         return False
     
-    def actuTabla(self, plistaFichas):
+    def actualizarTabla(self, plistaFichas):
         self.tabla = crearTablero(8)
         for jugador in plistaFichas:
             jugador.ubicarEnTablero(self.tabla)
@@ -77,11 +78,12 @@ class Tablero:
             if elemento.posicion >= 63:
                 return elemento.color
         return ""
-    #defina aquí los métodos de Tablero
-    #recuerde que el primer parámetro de cada método es siempre self
+######################        
+# PROGRAMA PRINCIPAL #
+######################
 fichasActuales = []
 contador = 1
-print("Los colores de las fichas serán: \n1. Rosa \n2. Rojo \n3. Azul \n4. Blanco \n¡Cada ficha inicia en la posición 0!\n")
+print("Los colores de las fichas serán: \n1. Rosa \n2. Rojo \n3. Azul \n4. Verde \n¡Cada ficha inicia en la posición 0!\n")
 colores = ["Rosa", "Rojo", "Azul", "Verde"]
 for i in range(4):
     fichita = Ficha(colores[i])
@@ -90,8 +92,10 @@ juego = Tablero(fichasActuales)
 while not juego.revisarGanador():
     for jugador in juego.listaFichas:
         jugador.avanzar()
-        if contador != 1: juego.actuTabla(fichasActuales)
+        if contador != 1: juego.actualizarTabla(fichasActuales)
         else: jugador.ubicarEnTablero(juego.tabla), juego.imprimirTablero()
+        if jugador.posicion >= 63:
+            break
     contador += 1
     print()
 print(f"El juego se ha acabado, ganador: {juego.sacarGanador()}")
